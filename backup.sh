@@ -1,7 +1,8 @@
 #!/bin/bash -e
+# freezing IRIS DBs
 ./preScript.sh
 
-#Do I need this?
+#Do I want to do this?
 #for target in $(findmnt -nlo TARGET -t ext4); do fsfreeze -f $target; done
 
 instance=`curl -s http://169.254.169.254/latest/meta-data/instance-id`
@@ -16,4 +17,8 @@ for volume in $(echo $volumes | tr " " "\n")
   do aws ec2 create-snapshot --volume-id $volume --description 'Consistent snapshot of IRIS' --region $region > /dev/null 2>&1
 done
 
+#Do I want to do this?
+#for target in $(findmnt -nlo TARGET -t ext4); do fsfreeze -u $target; done
+
+# Thawing IRIS DBs
 ./postScript.sh
