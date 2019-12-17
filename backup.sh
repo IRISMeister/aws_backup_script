@@ -13,9 +13,10 @@ volumes=`aws ec2 describe-instance-attribute --instance-id $instance --attribute
 # adding volume-id, tag(Name) to description would be nice for later use (restore).
 for volume in $(echo $volumes | tr " " "\n")
   # expecting only one device here
+do 
   device=`aws ec2 describe-volumes --volume-ids $volume --output text --query Volumes[0].Attachments[*].[Device] --region $region`
   #do aws ec2 create-snapshot --volume-id $volume --description 'Consistent snapshot of IRIS ' --tag-specifications 'Tags=$tags' --region $region > /dev/null 2>&1
-  do aws ec2 create-snapshot --volume-id $volume --description 'Consistent snapshot of IRIS on '$device --tag-specifications 'ResourceType=snapshot,Tags=[{Key=device,Value='$device'}]' --region $region > /dev/null 2>&1
+  aws ec2 create-snapshot --volume-id $volume --description 'Consistent snapshot of IRIS on '$device --tag-specifications 'ResourceType=snapshot,Tags=[{Key=device,Value='$device'}]' --region $region > /dev/null 2>&1
 done
 
 # Thawing IRIS DBs
