@@ -6,9 +6,17 @@ https://aws.amazon.com/jp/blogs/compute/automating-the-creation-of-consistent-am
 need shell scripts from this repo, too.  
 https://github.com/IRISMeister/azure_backup_script.git
 
-Make sure you have enabled O/S auth and have the matching IRIS user such as ec2-user.
-
+Make sure you have enabled O/S auth and have the matching IRIS user such as ubuntu.  
+You need to install awscli if it's not.
+```bash
+sudo apt install awscli
 ```
+You also need to configure aws cli if it's not.
+```bash
+aws configure
+```
+
+```bash
 git clone https://github.com/IRISMeister/azure_backup_script.git
 git clone https://github.com/IRISMeister/aws_backup_script.git
 cd aws_backup_script/
