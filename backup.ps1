@@ -7,9 +7,6 @@ $result = curl http://169.254.169.254/latest/meta-data/placement/availability-zo
 $region=$result[0].Content
 $region.Substring(0,$region.Length-1)
 
-$instance="i-01b620acf2594f8b0"
-$region="ap-northeast-1"
-
 $volumes=aws ec2 describe-instance-attribute --instance-id $instance --attribute blockDeviceMapping --query BlockDeviceMappings[*].Ebs.VolumeId --region $region | ConvertFrom-Json
 
 foreach($volume in $volumes) { 
