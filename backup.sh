@@ -3,7 +3,7 @@
 ./preScript.sh
 
 instance=`curl -s http://169.254.169.254/latest/meta-data/instance-id`
-region=`curl -s 169.254.169.254/latest/meta-data/placement/availability-zone`
+region=`curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone`
 region=${region::-1}
 
 volumes=`aws ec2 describe-instance-attribute --instance-id $instance --attribute blockDeviceMapping --output text --query BlockDeviceMappings[*].Ebs.VolumeId --region $region`
