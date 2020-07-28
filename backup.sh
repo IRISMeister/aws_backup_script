@@ -10,9 +10,7 @@ volumes=`aws ec2 describe-instance-attribute --instance-id $instance --attribute
 
 for volume in $(echo $volumes | tr " " "\n")
 do
-  nametag=`aws ec2 describe-tags --filters "Name=resource-id,Values=$volume" --query Tags[0].Value`
-  echo "nametag:"$nametag
-  # Example to process only volumes which have following TAG. Otherwise all attached devices are processed.
+  # Example to process only volumes which have following TAG. Otherwise no device will be processed.
   #    "Tags": [
   #      {
   #          "Key": "Name",
@@ -21,6 +19,8 @@ do
   #          "Value": "Test-0001-data"
   #      }
   #  ]
+  nametag=`aws ec2 describe-tags --filters "Name=resource-id,Values=$volume" "Name=key,Values=Name" --query Tags[0].Value`
+  echo "Name Tag:"$nametag
   if [[ $nametag == *-data* ]];
   then
     device=`aws ec2 describe-volumes --volume-ids $volume --output text --query Volumes[0].Attachments[*].[Device] --region $region`

@@ -10,8 +10,8 @@ $region.Substring(0,$region.Length-1)
 $volumes=aws ec2 describe-instance-attribute --instance-id $instance --attribute blockDeviceMapping --query BlockDeviceMappings[*].Ebs.VolumeId --region $region | ConvertFrom-Json
 
 foreach($volume in $volumes) { 
-    $nametag=aws ec2 describe-tags --filters "Name=resource-id,Values=$volume" --query Tags[0].Value
-    Write-Host "nametag:"$nametag
+    $nametag=aws ec2 describe-tags --filters "Name=resource-id,Values=$volume" "Name=key,Values=Name" --query Tags[0].Value
+    Write-Host "Name Tag:"$nametag
   
     if ($nametag -like "*-data*") {
         $device=aws ec2 describe-volumes --volume-ids $volume --output text --query Volumes[0].Attachments[*].[Device] --region $region
