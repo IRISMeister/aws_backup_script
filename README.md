@@ -29,7 +29,7 @@ Or create a (less privileged) new policy like this and assign it to the role.
 2. Assign the role to a target VM instance.  
 This will allow you to execute necessary "aws ec2" commands without AWS Access Key.
 
-3. Add 'Name' TAG and value(XXX-data) to volumes wish to take snapshots.  
+3. Add 'Name' TAG and value(XXX-data) to volumes you wish to take snapshots.  
 Example) Name:Test-0001-data
 
 4. You need to install and configure awscli if it's not. Leave AWS Access Key and AWS Secret Access Key blank.
@@ -51,9 +51,11 @@ Make sure the following command works for you, now.
 $ aws ec2 describe-instances
 ```
 
-5. Enable O/S authentication and have the matching IRIS user such as ubuntu.  
+5. Enable O/S authentication and have the matching IRIS user such as 'ubuntu'.  
 Make sure the following command works for you, without entering user/password, now.
 ```bash
+$ whoami
+ubuntu
 $ iris session iris
 USER>h
 $
