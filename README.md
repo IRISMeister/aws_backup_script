@@ -1,5 +1,6 @@
 # aws_backup_script
 
+Simple way to take clean EC2 snapshots for InterSystems IRIS Data platform.  
 Inspired by  
 https://aws.amazon.com/jp/blogs/compute/automating-the-creation-of-consistent-amazon-ebs-snapshots-with-amazon-ec2-systems-manager-part-1/  
 Needs shell scripts from this repo, too.  
