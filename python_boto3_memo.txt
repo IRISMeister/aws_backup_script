@@ -1,0 +1,30 @@
+https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.create_snapshots
+
+CFnでデプロイしたWindows/IRIS(シングルノード)で実行。
+ 
+USER>set tsc=##class(%SYS.Python).Install("boto3")
+Collecting boto3
+  Downloading boto3-1.17.72-py2.py3-none-any.whl (131 kB)
+Collecting jmespath<1.0.0,>=0.7.1
+  Downloading jmespath-0.10.0-py2.py3-none-any.whl (24 kB)
+Collecting botocore<1.21.0,>=1.20.72
+  Downloading botocore-1.20.72-py2.py3-none-any.whl (7.5 MB)
+Collecting s3transfer<0.5.0,>=0.4.0
+  Downloading s3transfer-0.4.2-py2.py3-none-any.whl (79 kB)
+Collecting python-dateutil<3.0.0,>=2.1
+  Downloading python_dateutil-2.8.1-py2.py3-none-any.whl (227 kB)
+Collecting urllib3<1.27,>=1.25.4
+  Downloading urllib3-1.26.4-py2.py3-none-any.whl (153 kB)
+Collecting six>=1.5
+  Downloading six-1.16.0-py2.py3-none-any.whl (11 kB)
+Installing collected packages: jmespath, six, python-dateutil, urllib3, botocore, s3transfer, boto3
+Successfully installed boto3-1.17.72 botocore-1.20.72 jmespath-0.10.0 python-dateutil-2.8.1 s3transfer-0.4.2 six-1.16.0 urllib3-1.26.4
+ 
+USER>set s=##class(%SYS.Python).Import("boto3_snapshot")
+USER>Set tSC=##Class(Backup.General).ExternalFreeze(0)
+USER>d s.run()
+started
+finished
+USER>Set tSC=##Class(Backup.General).ExternalThaw(0)
+USER>
+コンソールでSSの作成を確認。成功した。あとはresponseを解釈するロジックを追加すれば良さげ。
